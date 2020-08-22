@@ -1,7 +1,8 @@
-package com.quad.Trivia.TriviaWebservice;
+package com.quad.Trivia.TriviaWebservice.Controllers;
 
 import java.io.IOException; 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.quad.Trivia.TriviaWebservice.Helpers.TriviaFetcher;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class TriviaWebController {
 
     @GetMapping("/")
-    public String index(@RequestParam(name="Content", required=false) String content, Model model) {
+    public String index(Model model) {
+        String content = "Failed to fetch json";
         try {
             content = new ObjectMapper().writeValueAsString(new TriviaFetcher("5").FetchTrivia());
         } catch (IOException ex) {

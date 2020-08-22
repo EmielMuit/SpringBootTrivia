@@ -1,5 +1,6 @@
-package com.quad.Trivia.TriviaWebservice;
+package com.quad.Trivia.TriviaWebservice.Helpers;
 
+import com.quad.Trivia.TriviaWebservice.Responses.TriviaRestResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

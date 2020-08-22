@@ -1,4 +1,4 @@
-package com.quad.Trivia.TriviaWebservice;
+package com.quad.Trivia.TriviaWebservice.Responses;
 
 import java.util.List;
 

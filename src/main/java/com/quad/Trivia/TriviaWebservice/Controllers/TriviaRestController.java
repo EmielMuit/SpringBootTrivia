@@ -1,11 +1,11 @@
-package com.quad.Trivia.TriviaWebservice;
+package com.quad.Trivia.TriviaWebservice.Controllers;
 
+import com.quad.Trivia.TriviaWebservice.Responses.TriviaRestResponse;
+import com.quad.Trivia.TriviaWebservice.Helpers.TriviaFetcher;
 import java.io.IOException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
