@@ -1,4 +1,4 @@
-# SpringBootTrivia
+# SpringBootTrivia[![Build Status](https://travis-ci.org/EmielMuit/SpringBootTrivia.png?branch=master)](https://travis-ci.org/EmielMuit/SpringBootTrivia)
 A small demo project using SpringBoot framework
 
 Project is built with maven:
