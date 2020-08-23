@@ -19,20 +19,20 @@ public class RewrittenTriviaRestResponse {
     
     public RewrittenTriviaRestResponse(TriviaRestResponse triviaRestResponse)
     {
-        questions = new String[triviaRestResponse.getResults().size()];
-        answers = new String[triviaRestResponse.getResults().size()][];
-        for (int i = 0; i < triviaRestResponse.getResults().size(); i++)
+        int numberOfQuestions = triviaRestResponse.getResults().size();
+        questions = new String[numberOfQuestions];
+        answers = new String[numberOfQuestions][];
+        for (int i = 0; i < numberOfQuestions; i++)
         {
-            questions[i] = triviaRestResponse.getResults().get(i).getQuestion();
-            answers[i] = new String[triviaRestResponse.getResults().get(i).getIncorrect_answers().size()+1];
-            for (int j = 0; j < triviaRestResponse.getResults().get(i).getIncorrect_answers().size(); j++)
+            Result currentQuestion = triviaRestResponse.getResults().get(i);
+            questions[i] = currentQuestion.getQuestion();
+            answers[i] = new String[currentQuestion.getIncorrect_answers().size()+1];
+            int j;
+            for (j = 0; j < currentQuestion.getIncorrect_answers().size(); j++)
             {
-                answers[i][j] = triviaRestResponse.getResults().get(i).getIncorrect_answers().get(j);
-                if (j == triviaRestResponse.getResults().get(i).getIncorrect_answers().size() -1)
-                {
-                    answers[i][j+1] = triviaRestResponse.getResults().get(i).getCorrect_answer();
-                }
+                answers[i][j] = currentQuestion.getIncorrect_answers().get(j);
             }
+            answers[i][j] = currentQuestion.getCorrect_answer();
             List<String> answersToShuffle = Arrays.asList(answers[i]);
             Collections.shuffle(answersToShuffle);
             answers[i] = answersToShuffle.toArray(answers[i]);
