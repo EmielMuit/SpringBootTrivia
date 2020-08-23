@@ -1,11 +1,7 @@
-package com.quad.Trivia.TriviaWebservice.Responses;
+package com.quad.trivia.triviawebservice.responses;
 
 import java.util.List;
 
-/**
- *
- * @author emiel
- */
 public class TriviaRestResponse {
         
     private int response_code = -1;

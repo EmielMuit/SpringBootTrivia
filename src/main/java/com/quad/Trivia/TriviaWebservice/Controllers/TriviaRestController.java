@@ -1,11 +1,7 @@
-package com.quad.Trivia.TriviaWebservice.Controllers;
+package com.quad.trivia.triviawebservice.controllers;
 
-import com.quad.Trivia.TriviaWebservice.Responses.TriviaRestResponse;
-import com.quad.Trivia.TriviaWebservice.Helpers.TriviaFetcher;
-import java.io.IOException;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.quad.trivia.triviawebservice.helpers.TriviaFetcher;
+import com.quad.trivia.triviawebservice.responses.TriviaRestResponse;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,11 +13,6 @@ public class TriviaRestController {
     @GetMapping("/questions")
     public TriviaRestResponse triviaRestResponse(@RequestParam(value = "number", defaultValue = "5") String number)
     {
-        try {
-            return new TriviaFetcher(number).FetchTrivia();
-        } catch (IOException ex) {
-            Logger.getLogger(TriviaRestController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return new TriviaRestResponse();
+        return new TriviaFetcher(number).fetchTrivia();
     }
 }

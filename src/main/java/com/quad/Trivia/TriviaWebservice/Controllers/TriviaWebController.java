@@ -1,27 +1,20 @@
-package com.quad.Trivia.TriviaWebservice.Controllers;
+package com.quad.trivia.triviawebservice.controllers;
 
-import java.io.IOException; 
+import com.quad.trivia.triviawebservice.helpers.TriviaFetcher;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quad.Trivia.TriviaWebservice.Helpers.TriviaFetcher;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class TriviaWebController {
 
     @GetMapping("/")
-    public String index(Model model) {
-        String content = "Failed to fetch json";
-        try {
-            content = new ObjectMapper().writeValueAsString(new TriviaFetcher("5").FetchTrivia());
-        } catch (IOException ex) {
-            Logger.getLogger(TriviaWebController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public String index(Model model) throws JsonProcessingException {
+        String content = new ObjectMapper().writeValueAsString(new TriviaFetcher("5").fetchTrivia());
         model.addAttribute("content", content);
         return "index.html";
     }
