@@ -1,11 +1,51 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Trivia!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-    <p>Welcome, json data below!</p>
-    <p th:text="${content}" ></p>
-</body>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+        <script type="text/javascript">
+        var app = angular.module('triviaApp', []);
+        app.controller('triviaCtrl', function ($scope, $http) {
+            $scope.postdata = function () {
+                var numberOfQuestions = document.querySelectorAll(".triviaquestion").length;
+                
+                var answers = new Array(numberOfQuestions);
+                var i;
+                for (i = 0; i < numberOfQuestions; i++)
+                {
+                    if ($scope.question===undefined)
+                    {
+                        alert("You did not answer all questions");
+                        return;
+                    }
+                    if ($scope.question["answer"+i]!== undefined)
+                    {
+                        answers[i] = $scope.question["answer"+i];
+                    }
+                }
+                
+                var answerJSON = JSON.stringify(answers);
+                
+                $http.post('/checkanswers', answerJSON).then(function (response) {
+                    if (response.data)
+                    {
+                        console.log(JSON.stringify(response));
+                    }
+                }, function (response) {
+                    // Handle server response
+                });
+            };
+        });
+        </script>
+        <title>Trivia!</title>
+    </head>
+    <body>
+        <p>Welcome, trivia quiz below!</p>        
+        <div ng-app="triviaApp" ng-controller="triviaCtrl">
+            <div>
+                <p th:utext="${content}" ></p>
+                <input type="button" value="Send" ng-click="postdata()" /> <br/><br/>
+            </div>
+        </div>
+    </body>
 </html>

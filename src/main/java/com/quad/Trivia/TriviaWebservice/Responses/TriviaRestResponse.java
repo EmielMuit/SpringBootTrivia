@@ -14,10 +14,4 @@ public class TriviaRestResponse {
     public List<Result> getResults() {
         return results;
     }
-    
-    public RewrittenTriviaRestResponse rewrite()
-    {
-        RewrittenTriviaRestResponse rewrittenResponse = new RewrittenTriviaRestResponse(this);
-        return rewrittenResponse;
-    }
 }

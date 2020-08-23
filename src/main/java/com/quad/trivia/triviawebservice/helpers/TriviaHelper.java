@@ -5,29 +5,18 @@ import com.quad.trivia.triviawebservice.responses.TriviaRestResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.quad.trivia.triviawebservice.responses.RewrittenTriviaRestResponse;
 
 import java.io.IOException;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TriviaFetcher {
-    
-    URL url;
-    
-    public TriviaFetcher(String aNrOfQuestions)
-    {
-        try {
-            url = new URL("https://opentdb.com/api.php?amount=" + aNrOfQuestions);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(TriviaFetcher.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+public class TriviaHelper {
 
-    public TriviaRestResponse fetchTrivia()
+    public TriviaRestResponse fetchTrivia(URL url)
     {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
@@ -37,9 +26,15 @@ public class TriviaFetcher {
         try {
             triviaRestResponse = mapper.readValue(url, new TypeReference<TriviaRestResponse>(){});
         } catch (IOException ex) {
-            Logger.getLogger(TriviaFetcher.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TriviaHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
                 
         return triviaRestResponse;
+    }
+    
+    public RewrittenTriviaRestResponse rewriteTriviaRestResponse(TriviaRestResponse response)
+    {
+        RewrittenTriviaRestResponse rewrittenResponse = new RewrittenTriviaRestResponse(response);
+        return rewrittenResponse;
     }
 }
