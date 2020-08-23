@@ -1,5 +1,7 @@
 package com.quad.trivia.triviawebservice.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quad.trivia.triviawebservice.helpers.TriviaHelper;
 import com.quad.trivia.triviawebservice.responses.TriviaRestResponse;
 import java.net.MalformedURLException;
@@ -28,8 +30,17 @@ public class TriviaRestController {
     }
     
     @PostMapping(path = "/checkanswers", consumes = "application/json", produces = "application/json")
-    public @ResponseBody ResponseEntity checkAnswers(@RequestBody String answers, HttpSession session) {
+    public @ResponseBody ResponseEntity checkAnswers(@RequestBody String answers, HttpSession session) throws JsonProcessingException {
         System.out.println("ENTERED:\n" + answers);
-        return new ResponseEntity<>("{\"callsucceeded\":\"yup\"}", HttpStatus.OK);
+        int[] correctAnswers = (int[]) session.getAttribute("answers");
+        int[] submittedAnswers = new ObjectMapper().readValue(answers, int[].class);
+        
+        boolean[] correctness = new boolean[correctAnswers.length];
+        for (int i = 0; i < correctAnswers.length; i++)
+        {
+            correctness[i] = correctAnswers[i] == submittedAnswers[i];
+        }
+        
+        return new ResponseEntity<>(correctness, HttpStatus.OK);
     }
 }

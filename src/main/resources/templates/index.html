@@ -29,10 +29,24 @@
                 $http.post('/checkanswers', answerJSON).then(function (response) {
                     if (response.data)
                     {
-                        console.log(JSON.stringify(response));
+                        var i;
+                        var results = "Results: ";
+                        for (i = 0; i < response.data.length; i++)
+                        {
+                            results += "question " + i + ": ";
+                            if (response.data[i] == true)
+                            {
+                                results += "CORRECT! ";
+                            }
+                            else
+                            {
+                                results += "false, ";
+                            }
+                        }
+                        alert(results);
                     }
                 }, function (response) {
-                    // Handle server response
+                    console.log("Something went wrong");
                 });
             };
         });

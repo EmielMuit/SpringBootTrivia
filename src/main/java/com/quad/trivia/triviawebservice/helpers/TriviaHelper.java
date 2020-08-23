@@ -1,11 +1,11 @@
 package com.quad.trivia.triviawebservice.helpers;
 
+import com.quad.trivia.triviawebservice.responses.RewrittenTriviaRestResponse;
 import com.quad.trivia.triviawebservice.responses.TriviaRestResponse;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.quad.trivia.triviawebservice.responses.RewrittenTriviaRestResponse;
 
 import java.io.IOException;
 
