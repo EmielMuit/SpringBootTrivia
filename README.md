@@ -8,5 +8,10 @@ This generates:
 To run this application:
 ```java -jar SpringBootTrivia/Target/TriviaWebservice-0.0.1-SNAPSHOT.jar```
 
-Currently the application fetches JSON for 5 questions by accessing
-IP:8080/questions
+At localhost:8080 a 5 question trivia quiz is running.
+
+At localhost:8080/questions the questions and possible answers for the quiz can be retrieved.
+
+At localhost:8080/checkanswers you can manually post an int array containing indices of correct answers in order.
+
+After finishing the quiz a new one appears.

@@ -1,8 +1,5 @@
 package com.quad.trivia.triviawebservice.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.quad.trivia.triviawebservice.helpers.Consts;
 import com.quad.trivia.triviawebservice.helpers.TriviaHelper;
 import com.quad.trivia.triviawebservice.responses.RewrittenTriviaRestResponse;
@@ -37,23 +34,8 @@ public class TriviaRestController {
     public @ResponseBody
     ResponseEntity checkAnswers(@RequestBody String answers, HttpSession session) {
         try {
-            // Get correct answers from session
-            int[] correctAnswers = (int[]) session.getAttribute(Consts.ANSWERARRAYSESSIONATTRIBUTENAME);
-            // Get submitted answers as array
-            int[] submittedAnswers = new ObjectMapper().readValue(answers, int[].class);
-
-            // Create boolean array describing correctness
-            boolean[] correctness = new boolean[correctAnswers.length];
-            for (int i = 0; i < correctAnswers.length; i++) {
-                correctness[i] = correctAnswers[i] == submittedAnswers[i];
-            }
-
-            // Renew trivia!
-            TriviaHelper t = new TriviaHelper();
-            t.fetchTrivia(session);
-
-            // Return correctness array
-            return new ResponseEntity<>(correctness, HttpStatus.OK);
+            // Return correctness array and renew trivia
+            return new ResponseEntity<>(new TriviaHelper().checkAnswers(answers, session), HttpStatus.OK);
         }
         catch (Exception e)
         {
