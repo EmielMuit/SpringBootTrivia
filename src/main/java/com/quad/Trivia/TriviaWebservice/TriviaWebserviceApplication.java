@@ -6,8 +6,8 @@ import org.springframework.boot.SpringApplication;
 @SpringBootApplication
 public class TriviaWebserviceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TriviaWebserviceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TriviaWebserviceApplication.class, args);
+    }
 
 }

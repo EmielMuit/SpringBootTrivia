@@ -19,13 +19,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(TriviaWebController.class)
 class TriviaWebserviceApplicationTests {
+
     /*
     This test class will test client interactions only to prevent 
     build failure when OpenTDB.com is down, or internet is not available.
-    */
+     */
     @Autowired
     private TriviaWebController controller;
-    
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -39,9 +40,9 @@ class TriviaWebserviceApplicationTests {
     @Test
     /*
     Homepage should contain the default message
-    */
+     */
     public void shouldReturnDefaultMessage() throws Exception {
         this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
-        .andExpect(content().string(containsString("trivia quiz")));
+                .andExpect(content().string(containsString("trivia quiz")));
     }
 }

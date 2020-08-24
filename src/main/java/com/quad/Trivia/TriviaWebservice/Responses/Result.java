@@ -3,6 +3,7 @@ package com.quad.trivia.triviawebservice.responses;
 import java.util.List;
 
 public class Result {
+
     private String category;
     private String type;
     private String difficulty;
@@ -29,8 +30,8 @@ public class Result {
     public String getCorrect_answer() {
         return correct_answer;
     }
-    
-    public List<String>getIncorrect_answers() {
+
+    public List<String> getIncorrect_answers() {
         return incorrect_answers;
     }
 }

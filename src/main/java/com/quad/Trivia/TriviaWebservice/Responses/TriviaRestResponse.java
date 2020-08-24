@@ -3,7 +3,7 @@ package com.quad.trivia.triviawebservice.responses;
 import java.util.List;
 
 public class TriviaRestResponse {
-        
+
     private int response_code = -1;
     private List<Result> results;
 
