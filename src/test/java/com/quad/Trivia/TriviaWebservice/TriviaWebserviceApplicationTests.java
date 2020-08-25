@@ -1,15 +1,21 @@
 package com.quad.trivia.triviawebservice;
 
 import com.quad.trivia.triviawebservice.controllers.TriviaWebController;
+import com.quad.trivia.triviawebservice.responses.RewrittenTriviaRestResponse;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -18,20 +24,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(TriviaWebController.class)
 class TriviaWebserviceApplicationTests {
-
-    /*
-    This test class will test client interactions only to prevent 
-    build failure when OpenTDB.com is down, or internet is not available.
-     */
-    @Autowired
-    private TriviaWebController controller;
-
+    
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     public void contextLoads() {
-        assertThat(controller).isNotNull();
         assertThat(mockMvc).isNotNull();
     }
 

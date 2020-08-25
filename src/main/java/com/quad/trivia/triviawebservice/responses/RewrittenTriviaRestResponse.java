@@ -17,6 +17,8 @@ public class RewrittenTriviaRestResponse {
         return answers;
     }
 
+    public RewrittenTriviaRestResponse(){}
+    
     public RewrittenTriviaRestResponse(TriviaRestResponse triviaRestResponse) {
         int numberOfQuestions = triviaRestResponse.getResults().size();
         questions = new String[numberOfQuestions];
