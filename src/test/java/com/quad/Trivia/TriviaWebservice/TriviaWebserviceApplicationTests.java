@@ -36,7 +36,6 @@ class TriviaWebserviceApplicationTests {
         assertThat(mockMvc).isNotNull();
     }
 
-    @Disabled("Broken since using /questions endpoint") //TO-DO: Fix
     @Test
     /*
     Homepage should contain the default message

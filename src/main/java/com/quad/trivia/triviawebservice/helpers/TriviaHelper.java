@@ -12,6 +12,10 @@ import org.springframework.web.client.RestTemplate;
 
 public class TriviaHelper {
 
+    private static TriviaHelper triviaHelperInstance = null;
+    
+    private TriviaHelper(){}
+    
     // Checks submitted answers for correctness, restarts a game!
     public boolean[] checkAnswers(String answers, HttpSession session) throws JsonProcessingException
     {
@@ -74,5 +78,14 @@ public class TriviaHelper {
 
     public void storeForm(RewrittenTriviaRestResponse rewrittenResponse, HttpSession session) {
         session.setAttribute(Consts.MODELFORMVARIABLECONTENT, this.generateQuestionForm(rewrittenResponse));
+    }
+    
+    public static TriviaHelper getTriviaHelperInstance()
+    {
+        if (triviaHelperInstance == null)
+        {
+            triviaHelperInstance = new TriviaHelper();
+        }
+        return triviaHelperInstance;
     }
 }

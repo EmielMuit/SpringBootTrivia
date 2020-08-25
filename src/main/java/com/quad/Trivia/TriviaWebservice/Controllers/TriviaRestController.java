@@ -22,8 +22,7 @@ public class TriviaRestController {
     public RewrittenTriviaRestResponse triviaRestResponse(HttpSession session) throws MalformedURLException {
         if (session.isNew()) {
             // If the user decides to fetch questions with /GET on /questions, store this in a session
-            TriviaHelper t = new TriviaHelper();
-            return t.fetchTrivia(session);
+            return TriviaHelper.getTriviaHelperInstance().fetchTrivia(session);
         } else {
             // Otherwise it is in session storage, return this instead
             return (RewrittenTriviaRestResponse) session.getAttribute(Consts.REWRITTENJSONSESSIONATTRIBUTENAME);
@@ -35,7 +34,7 @@ public class TriviaRestController {
     ResponseEntity checkAnswers(@RequestBody String answers, HttpSession session) {
         try {
             // Return correctness array and renew trivia
-            return new ResponseEntity<>(new TriviaHelper().checkAnswers(answers, session), HttpStatus.OK);
+            return new ResponseEntity<>(TriviaHelper.getTriviaHelperInstance().checkAnswers(answers, session), HttpStatus.OK);
         }
         catch (Exception e)
         {

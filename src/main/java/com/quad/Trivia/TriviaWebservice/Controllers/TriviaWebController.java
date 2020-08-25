@@ -18,7 +18,7 @@ public class TriviaWebController {
             // Restore form
             model.addAttribute(Consts.MODELFORMVARIABLENAME, (String) session.getAttribute(Consts.MODELFORMVARIABLECONTENT));
         } else {
-            new TriviaHelper().fetchTrivia(session);
+            TriviaHelper.getTriviaHelperInstance().fetchTrivia(session);
             // Display form
             model.addAttribute(Consts.MODELFORMVARIABLENAME, (String) session.getAttribute(Consts.MODELFORMVARIABLECONTENT));
         }
