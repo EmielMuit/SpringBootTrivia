@@ -14,14 +14,11 @@ public class TriviaWebController {
 
     @GetMapping(Consts.ROOTURL)
     public String index(Model model, HttpSession session) {
-        if (!session.isNew()) {
-            // Restore form
-            model.addAttribute(Consts.MODELFORMVARIABLENAME, (String) session.getAttribute(Consts.MODELFORMVARIABLECONTENT));
-        } else {
+        if (session.isNew()) {
             TriviaHelper.getTriviaHelperInstance().fetchTrivia(session);
-            // Display form
-            model.addAttribute(Consts.MODELFORMVARIABLENAME, (String) session.getAttribute(Consts.MODELFORMVARIABLECONTENT));
         }
+        //Display form
+        model.addAttribute(Consts.MODELFORMVARIABLENAME, (String) session.getAttribute(Consts.MODELFORMVARIABLECONTENT));
         return Consts.HOMEPAGE;
     }
 }

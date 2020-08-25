@@ -21,12 +21,10 @@ public class TriviaRestController {
     @GetMapping(Consts.QUESTIONMAPPING)
     public RewrittenTriviaRestResponse triviaRestResponse(HttpSession session) throws MalformedURLException {
         if (session.isNew()) {
-            // If the user decides to fetch questions with /GET on /questions, store this in a session
-            return TriviaHelper.getTriviaHelperInstance().fetchTrivia(session);
-        } else {
-            // Otherwise it is in session storage, return this instead
-            return (RewrittenTriviaRestResponse) session.getAttribute(Consts.REWRITTENJSONSESSIONATTRIBUTENAME);
+            // If the user decides to fetch questions with /GET on /questions, store this in a session before returning
+            TriviaHelper.getTriviaHelperInstance().fetchTrivia(session);
         }
+        return (RewrittenTriviaRestResponse) session.getAttribute(Consts.REWRITTENJSONSESSIONATTRIBUTENAME);
     }
 
     @PostMapping(path = Consts.CHECKANSWERSMAPPING, consumes = Consts.CONTENTTYPE, produces = Consts.CONTENTTYPE)
