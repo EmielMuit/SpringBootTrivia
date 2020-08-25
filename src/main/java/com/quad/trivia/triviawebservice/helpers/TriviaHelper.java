@@ -51,15 +51,19 @@ public class TriviaHelper {
     
     // Generates the HTML form containing questions
     public String generateQuestionForm(RewrittenTriviaRestResponse rewrittenTriviaRestResponse) {
-        String form = "<div>Questions:";
+        String form = "<div><h2>Questions:</h2>";
         for (int i = 0; i < rewrittenTriviaRestResponse.getQuestions().length; i++) {
             // Generate question and answer radio buttons HTML
-            form = form.concat("<p class=\"triviaquestion\">Question " + (i + 1) + ", " + rewrittenTriviaRestResponse.getQuestions()[i] + "</br>");
+            form = form.concat("<p class=\"triviaquestion\">Question " + (i + 1) + ", " + rewrittenTriviaRestResponse.getQuestions()[i] + "</p>");
             for (int j = 0; j < rewrittenTriviaRestResponse.getAnswers().get(i).size(); j++) {
-                form = form.concat("<input ng-model=\"question.answer" + i + "\" ng-value=\"" + j + "\" type=\"radio\">");
+                form = form.concat("<input id=\"answer"+ i + j + "\" " // id
+                                  + "ng-model=\"trivia.question.answer" + i + "\" " // model name
+                                  + "ng-value=\"" + j + "\" " // value
+                                  + "type=\"radio\" " // type
+                                  + "class=\"stv-radio-button\">"); // radiobutton
+                // label for radio button
                 form = form.concat("<label for=\"answer" + i + j + "\">" + rewrittenTriviaRestResponse.getAnswers().get(i).get(j) + "</label></br>");
             }
-            form = form.concat("</p>");
         }
         form = form.concat("</div>");
         return form;

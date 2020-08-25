@@ -4,66 +4,16 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/css/css.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-        <script type="text/javascript">
-        var app = angular.module('triviaApp', []);
-        app.controller('triviaCtrl', function ($scope, $http) {
-            $scope.postdata = function () {
-                var numberOfQuestions = document.querySelectorAll(".triviaquestion").length;
-                
-                var answers = new Array(numberOfQuestions);
-                var i;
-                for (i = 0; i < numberOfQuestions; i++)
-                {
-                    if ($scope.question===undefined)
-                    {
-                        alert("You did not answer all questions");
-                        return;
-                    }
-                    if ($scope.question["answer"+i]!== undefined)
-                    {
-                        answers[i] = $scope.question["answer"+i];
-                    }
-                }
-                
-                var answerJSON = JSON.stringify(answers);
-                
-                $http.post('/checkanswers', answerJSON).then(function (response) {
-                    if (response.data)
-                    {
-                        var i;
-                        var results = "Results: ";
-                        for (i = 0; i < response.data.length; i++)
-                        {
-                            results += "Question " + (i+1) + ": ";
-                            if (response.data[i] == true)
-                            {
-                                results += "CORRECT! ";
-                            }
-                            else
-                            {
-                                results += "false, ";
-                            }
-                        }
-                        alert(results.substring(0, results.length - 2) + ".");
-                        location.reload();
-                    }
-                }, function (response) {
-                    console.log("Something went wrong");
-                    location.reload();
-                });
-            };
-        });
-        </script>
+        <script src="/js/js.js"></script>
         <title>Trivia!</title>
     </head>
     <body>
-        <p>Welcome, trivia quiz below!</p>        
+        <h1>Welcome, trivia quiz below!</h1>        
         <div ng-app="triviaApp" ng-controller="triviaCtrl">
-            <div>
-                <p th:utext="${content}" ></p>
-                <input type="button" value="Send" ng-click="postdata()" /> <br/><br/>
-            </div>
+            <p th:utext="${content}"></p>
+            <input type="button" value="Send" ng-click="postdata()" /> <br/><br/>
         </div>
     </body>
 </html>
