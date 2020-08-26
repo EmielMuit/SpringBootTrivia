@@ -2,11 +2,11 @@
 A small demo project using SpringBoot framework
 
 Project is built with maven:
-```./mvnw clean package```
+```mvn clean package```
 This generates:
-```SpringBootTrivia/Target/TriviaWebservice-0.0.1-SNAPSHOT.jar```
-To run this application:
-```java -jar SpringBootTrivia/Target/TriviaWebservice-0.0.1-SNAPSHOT.jar```
+```SpringBootTrivia/target/triviawebservice-0.0.1-SNAPSHOT.jar```
+To run this application, from the project root:
+```java -jar target/triviawebservice-0.0.1-SNAPSHOT.jar```
 
 At localhost:8080 a 5 question trivia quiz is running.
 
